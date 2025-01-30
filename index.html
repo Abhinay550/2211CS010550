@@ -3,18 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Javascript</h1>
 
+    <div class="container">
+        <h2>Signup Form</h2>
+        <form id="signupForm">
+            <label>Username:</label>
+            <input type="text" id="username">
+            <p class="error" id="usernameError"></p>
 
-    <!-- <script src="./app.js"></script> -->
-     <!-- <script src="./operators.js"></script> -->
-      <!-- <script src="./switch.js"></script><script> -->
-      <!-- <script src="./if else ladder.js"></script> -->
-       <script src="./loop.js"></script>
+            <label>Email:</label>
+            <input type="text" id="email">
+            <p class="error" id="emailError"></p>
+
+            <label>Password (6 characters):</label>
+            <input type="password" id="password">
+            <p class="error" id="passwordError"></p>
+
+            <label>Confirm Password:</label>
+            <input type="password" id="confirmPassword">
+            <p class="error" id="confirmPasswordError"></p>
+
+            <button type="button" onclick="validateForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Getting values
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Error message elements
+            let usernameError = document.getElementById("usernameError");
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+            let confirmPasswordError = document.getElementById("confirmPasswordError");
+
+            // Reset errors
+            usernameError.textContent = "";
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            confirmPasswordError.textContent = "";
+
+            let isValid = true;
+
+            // Username validation
+            if (username === "") {
+                usernameError.textContent = "Username cannot be empty";
+                isValid = false;
+            }
+
+            // Email validation
+            if (email === "" || !email.includes("@")) {
+                emailError.textContent = "Enter a valid email with '@'";
+                isValid = false;
+            }
+
+            // Password validation
+            if (password.length !== 6) {
+                passwordError.textContent = "Password must be exactly 6 characters";
+                isValid = false;
+            }
+
+            // Confirm Password validation
+            if (confirmPassword !== password || confirmPassword === "") {
+                confirmPasswordError.textContent = "Passwords do not match or empty";
+                isValid = false;
+            }
+
+            // Final validation check
+            if (isValid) {
+                alert("Form is submitted successfully!");
+
+                // **Clear form fields**
+                document.getElementById("signupForm").reset();
+            }
+        }
+    </script>
 
 </body>
-</html>>
-
+</html>
